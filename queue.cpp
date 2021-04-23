@@ -7,6 +7,8 @@
  */
 
 #include <iostream>
+#include <cstring>
+#include "queue.h"
 
 /* Constructor sets rear to null */
 queue::queue(){

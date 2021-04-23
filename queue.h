@@ -7,14 +7,15 @@
  */
 
 #include <iostream>
+#include "trivia.h"
 
 struct q_node {
   q_node* next;
-  char* question;
-  char* answer;
-  bool is_used;
+  trivia* data;
 };
 
+/* all int return type functions return a 0 for failure  
+   and a 1 for success  */
 class queue{
  public:
   queue(); //Task 6: queue constructor
