@@ -3,6 +3,7 @@
    stack.cpp contains the following member functions:
    constructor, destructor, push, display, pop
 
+   Last updated: April 23
  */
 
 #include <iostream>
@@ -74,22 +75,17 @@ int stack::push(char* question, char* answer){
    and displays all nodes in the list */ 
 int stack::display(){
   s_node* current = head->next;
-  std::cout << "t: " << top_index << std::endl;
-  
+
   //head is a special case
   //if it's not completely full, it will display garbage data
-  if(top_index != SIZE){
-    std::cout << "woo" << std::endl;
-    for(int i = 0; i < top_index; i++){
-      std::cout << "Question: " << head->data[i].question << std::endl;
-      std::cout << "Answer: " << head->data[i].answer << std::endl;
-      std::cout << " " << std::endl;
-    }
-  }
-  
+  for(int i = 0; i < top_index; i++){
+    std::cout << "Question: " << head->data[i].question << std::endl;
+    std::cout << "Answer: " << head->data[i].answer << std::endl;
+    std::cout << " " << std::endl;
+  }  
+
   //now just display the rest
   while(current != NULL){
-    std::cout << "yay" << std::endl;
     for(int j = 0; j < SIZE; j++){
       std::cout << "Question: " << current->data[j].question << std::endl;
       std::cout << "Answer: " << current->data[j].answer << std::endl;
