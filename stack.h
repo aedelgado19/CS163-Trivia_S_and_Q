@@ -10,7 +10,7 @@
 
 //nodes for the stack (LLL)
 struct s_node { 
-  trivia* array_pointer; 
+  trivia* data;
   s_node* next;
 };
 

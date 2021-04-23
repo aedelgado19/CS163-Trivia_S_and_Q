@@ -15,28 +15,28 @@ queue::queue(){
 
 }
 
-/* Destructor frees all dynamic memory */
+/* Destructor deallocates all dynamic memory */
 queue::~queue(){
 
 }
 
 /* Enqueue is passed user input from main and creates
    a new node, adding it to the rear */
-int enqueue(char* question, char* answer){
+int queue::enqueue(char* question, char* answer){
 
   return 0;
 }
 
 /* Display takes no parameters since the rear is a private
    data member, and displays all nodes in the list */
-int display(){
+int queue::display(){
 
   return 0;
 }
 
 /* Dequeue takes in no parameters since it removes the
    front node */
-int dequeue(){
+int queue::dequeue(){
 
   return 0;
 }
