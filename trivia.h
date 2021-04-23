@@ -7,6 +7,7 @@
  */
 
 #include <iostream>
+#pragma once
 
 struct trivia {
   char* question;
