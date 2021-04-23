@@ -32,4 +32,5 @@ class stack {
   
  private:
   s_node* head;
+  int top_index; //set to zero initially. When it equals SIZE, the array is full
 };

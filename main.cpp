@@ -69,7 +69,8 @@ int main(){
     }
 
     if(strcmp(input, "du") == 0){ //used stack
-
+      success = used_stack->display();
+      print_error_messages(success, "display");
     }
 
     if(strcmp(input, "dc") == 0){ //correct stack
