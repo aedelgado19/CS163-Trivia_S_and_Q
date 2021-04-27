@@ -18,30 +18,26 @@ int main(){
   cout << " " << endl;
   cout << "********************************************* " << endl;
   cout << "Welcome to Trivia: stack and queue edition" << endl;
-  cout << "Type 'help' to see possible commands." << endl;
-
+  
   while(strcmp(input, "q") != 0){
+    cout << "---------------------------------------------------" << endl;
+    cout << "Stack commands so far: " << endl;
+    cout << "   push - push a new trivia question" << endl;
+    cout << "   ds - display stack" << endl;
+    cout << "   pop - pop a question off the top of the stack" << endl; 
+
+    cout << " " << endl;
+    cout << "Queue commands so far: " << endl;
+    cout << "   eq - enqueue a trivia question to the rear of the queue" << endl; 
+    cout << "   dq - display the queue" << endl;
     cout << "> ";
     cin.get(input, 20);
     cin.get();
-
+    cout << "---------------------------------------------------" << endl;
+    
     //change input to lowercase
     for(int i = 0; i < (int) strlen(input); i++){
       input[i] = tolower(input[i]);
-    }
-
-    if(strcmp(input, "help") == 0){
-      cout << "Commands are: " << endl;
-      cout << "'add' - add a trivia question" << endl; //queue
-      cout << "'draw' - choose a trivia question" << endl; //queue
-      cout << "'du' - display used questions" << endl; //used stack
-      cout << "'dc' - display correctly answered questions" << endl; //correct stack
-      cout << "'dq' - display playable questions" << endl; // queue
-      cout << " " << endl;
-      cout << "specifically for submission 1: " << endl;
-      cout << "'push' - push a question to the stack" << endl;
-      cout << "(and use 'du' to display since we are pretending " << endl;
-      cout << "to be moving items from the queue to the used stack) " << endl;
     }
     
     if(strcmp(input, "push") == 0){ //stack testing function
@@ -59,26 +55,32 @@ int main(){
       success = used_stack->push(question, answer);
       print_error_messages(success, "push");
     }
-    
-    if(strcmp(input, "add") == 0){ //queue
 
-    }
-    
-    if(strcmp(input, "draw") == 0){ //queue
-      
-    }
-
-    if(strcmp(input, "du") == 0){ //used stack
+    if(strcmp(input, "ds") == 0){ 
       success = used_stack->display();
       print_error_messages(success, "display");
     }
 
-    if(strcmp(input, "dc") == 0){ //correct stack
-
+    if(strcmp(input, "pop") == 0){ //stack
+      success = used_stack->pop();
+      print_error_messages(success, "pop");
     }
 
+    if(strcmp(input, "eq") == 0){ //queue
+      cout << "Enter the question: " << endl;
+      cout << "> ";
+      cin.get(question, 40);
+      cin.get();
+      cout << "Enter the answer: " << endl;
+      cout << "> ";
+      cin.get(answer, 40);
+      cin.get();
+      success = new_queue->enqueue(question, answer);
+      print_error_messages(success, "eq");
+    }
     if(strcmp(input, "dq") == 0){ //queue
-
+      success = new_queue->display();
+      print_error_messages(success, "d");
     }
   }
   cout << "Goodbye!" << endl;
@@ -91,9 +93,31 @@ void print_error_messages(int success, const char function_name[]){
       cout << "Pushed successfully." << endl;
       cout << " " << endl;
     }
+    if(strcmp(function_name, "pop") == 0){
+      cout << "Popped successfully." << endl;
+      cout << " " << endl;
+    }
+    if(strcmp(function_name, "eq") == 0){
+      cout << "Enqueued successfully." << endl;
+      cout << " " << endl;
+    }
     return;
-  } else { //failure
+  } else if (success == -1){ //list is null
+    if(strcmp(function_name, "d") == 0){
+      cout << "Nothing to display." << endl;
+      cout << " " << endl;
+      return;
+    }
+    if(strcmp(function_name, "display") == 0){
+      cout << "Nothing to display." << endl;
+      cout << " " << endl;
+      return;
+    }
+    if(strcmp(function_name, "pop") == 0){
+      cout << "Nothing to pop." << endl;
+      cout << " " << endl;
+    }
+  } else { //return a 0 (failure)
     cout << "Error in function: " << function_name << endl;
   }
-  
 }
