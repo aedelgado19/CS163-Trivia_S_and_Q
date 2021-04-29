@@ -30,6 +30,7 @@ int main(){
     cout << "Queue commands so far: " << endl;
     cout << "   eq - enqueue a trivia question to the rear of the queue" << endl; 
     cout << "   dq - display the queue" << endl;
+    cout << "   deq - dequeue" << endl;
     cout << "> ";
     cin.get(input, 20);
     cin.get();
@@ -38,6 +39,11 @@ int main(){
     //change input to lowercase
     for(int i = 0; i < (int) strlen(input); i++){
       input[i] = tolower(input[i]);
+    }
+
+    if(strcmp(input, "deq") == 0){
+      success = new_queue->dequeue();
+      print_error_messages(success, "deq");
     }
     
     if(strcmp(input, "push") == 0){ //stack testing function
@@ -101,6 +107,10 @@ void print_error_messages(int success, const char function_name[]){
       cout << "Enqueued successfully." << endl;
       cout << " " << endl;
     }
+    if(strcmp(function_name, "deq") == 0){
+      cout << "Dequeued sucessfully." << endl;
+      cout << " " << endl;
+    }
     return;
   } else if (success == -1){ //list is null
     if(strcmp(function_name, "d") == 0){
@@ -115,6 +125,10 @@ void print_error_messages(int success, const char function_name[]){
     }
     if(strcmp(function_name, "pop") == 0){
       cout << "Nothing to pop." << endl;
+      cout << " " << endl;
+    }
+    if(strcmp(function_name, "deq") == 0){
+      cout << "Nothing to dequeue." << endl;
       cout << " " << endl;
     }
   } else { //return a 0 (failure)

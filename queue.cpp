@@ -64,18 +64,19 @@ int queue::display(){
 
   //there's nothing to display if rear is null
   if(!rear) return -1;
-
+  
   //if the rear is the only node
   if(rear->next == rear){
-    std::cout << "Question: " << current->data->question << std::endl;
-    std::cout << "Answer: " << current->data->answer << std::endl;
+    std::cout << "Question: " << rear->data->question << std::endl;
+    std::cout << "Answer: " << rear->data->answer << std::endl;
     return 1;
   }
-  
+
   //traverse list, display as you go
   while(current->next != rear){
     std::cout << "Question: " << current->data->question << std::endl;
     std::cout << "Answer: " << current->data->answer << std::endl;
+    std::cout << " " << std::endl;
     current = current->next;
   }
   std::cout << "Question: " << current->data->question << std::endl;
@@ -87,5 +88,20 @@ int queue::display(){
    front node */
 int queue::dequeue(){
 
-  return 0;
+  //if there's nothing to dequeue, return failure
+  if(!rear) return -1;
+
+  //if there's only one node to remove
+  if(rear->next == rear){
+    delete rear;
+    rear = NULL;
+    return 1;
+  }
+
+  //otherwise remove the front node and update rear's next
+  q_node* hold = rear->next;
+  rear->next = rear->next->next;
+  hold->next = NULL;
+  delete hold;
+  return 1;
 }
