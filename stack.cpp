@@ -76,7 +76,7 @@ int stack::push(char* question, char* answer){
 /* display takes no parameters since it uses the private member head*
    and displays all nodes in the list */ 
 int stack::display(){
-  if(!head) return -1;
+  if(!head) return 0;
   s_node* current = head->next;
   
   //head is a special case
@@ -102,7 +102,7 @@ int stack::display(){
 /* pop removes a trivia question from the top of the list.
    it needs no parameters since it uses the private data member head* */
 int stack::pop(){
-  if(!head) return -1;
+  if(!head) return 0;
 
   //special case: deleting the last element in head and head is the only node
   if(head->next == NULL && top_index == 1){

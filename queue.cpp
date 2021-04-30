@@ -63,7 +63,7 @@ int queue::display(){
   q_node* current = rear;
 
   //there's nothing to display if rear is null
-  if(!rear) return -1;
+  if(!rear) return 0;
   
   //if the rear is the only node
   if(rear->next == rear){
@@ -89,19 +89,62 @@ int queue::display(){
 int queue::dequeue(){
 
   //if there's nothing to dequeue, return failure
-  if(!rear) return -1;
+  if(!rear) return 0;
 
   //if there's only one node to remove
   if(rear->next == rear){
+    question_asked = rear;
     delete rear;
     rear = NULL;
     return 1;
   }
 
   //otherwise remove the front node and update rear's next
+  question_asked = rear->next;
   q_node* hold = rear->next;
   rear->next = rear->next->next;
   hold->next = NULL;
   delete hold;
+  return 1;
+}
+
+/* a function to call all functions necessary to draw a question
+   so that the user doesn't have to call "dequeue" for example. That would
+   break some rules of data abstraction. */
+int queue::draw(){
+  dequeue();
+  display_question();
+  //push() to used stack
+  return 0;
+}
+
+/* checks the answer provided by user. 
+   if correct, it returns true.
+   if wrong, it returns false */
+bool queue::check(char* user_answer){
+  char* correct_answer = NULL;
+
+  if(question_asked == NULL){
+    return false;
+  } else { //point to the actual answer
+    correct_answer = question_asked->data->answer;
+  }
+
+  //convert to lowercase
+  for(int i = 0; i < (int) strlen(user_answer); ++i){
+    user_answer[i] = std::tolower(user_answer[i]);
+  }
+
+  //check match
+  if (strcmp(correct_answer, user_answer) == 0){ //check match
+    return true;
+  }
+  return false;
+}
+
+int display_question(){
+  if(!question_asked) return 0; //no question was asked
+  
+  std::cout << question_asked->data->question << std::endl;
   return 1;
 }
