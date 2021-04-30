@@ -33,24 +33,23 @@ queue::~queue(){
 int queue::enqueue(char* question, char* answer){
   if(!question || !answer) return 0;
 
-  //fill in new trivia array element
-  trivia* element = new trivia();
-  element->question = new char[strlen(question) + 1];
-  element->answer = new char[strlen(answer) + 1];
-  strcpy(element->question, question);
-  strcpy(element->answer, answer);
+  //create a new queue node
+  q_node* new_node = new q_node();
+  new_node->data = new trivia();
+  new_node->data->question = new char[strlen(question) + 1];
+  new_node->data->answer = new char[strlen(answer) + 1];
+  strcpy(new_node->data->question, question);
+  strcpy(new_node->data->answer, answer);
+
   
   //case 1: rear is null
   if(!rear){
-    rear = new q_node();
-    rear->data = element;
+    rear = new_node;
     rear->next = rear;
     return 1;
   }
 
   //case 2: all other cases where rear isn't null
-  q_node* new_node = new q_node();
-  new_node->data = element;
   new_node->next = rear->next;
   rear->next = new_node;
   rear = new_node;
@@ -111,13 +110,10 @@ int queue::dequeue(){
 /* checks the answer provided by user. if correct, it returns true.
    if wrong, it returns false */
 bool queue::check(char* user_answer){
-  char* correct_answer = NULL;
-
+  //if the user didn't select a question first
   if(question_asked == NULL){
     return false;
-  } else { //point to the actual answer
-    correct_answer = question_asked->data->answer;
-  }
+  } 
 
   //convert to lowercase
   for(int i = 0; i < (int) strlen(user_answer); ++i){
@@ -125,7 +121,7 @@ bool queue::check(char* user_answer){
   }
 
   //check match
-  if (strcmp(correct_answer, user_answer) == 0){ //check match
+  if (strcmp(question_asked->data->answer, user_answer) == 0){ //check match
     return true;
   }
   return false;

@@ -57,7 +57,6 @@ int main(){
 	correct_stack->push(q, a);
       }
     }
-
     //draw calls dequeue, a print function, and push
     if(strcmp(input, "draw") == 0){
       exists = new_queue->check_exists();

@@ -39,18 +39,14 @@ stack::~stack(){
 int stack::push(char* question, char* answer){
   if(!question  || !answer) return 0;
 
-  //fill in new trivia array element
-  trivia* element = new trivia();
-  element->question = new char[strlen(question) + 1];
-  element->answer = new char[strlen(answer) + 1];
-  strcpy(element->question, question);
-  strcpy(element->answer, answer);
-  
   //head doesn't exist
   if(!head){
     head = new s_node();
     head->data = new trivia[SIZE];
-    head->data[top_index] = *element;
+    head->data[top_index].question = new char[strlen(question) + 1];
+    head->data[top_index].answer = new char[strlen(answer) + 1];
+    strcpy(head->data[top_index].question, question);
+    strcpy(head->data[top_index].answer, answer);
     head->next = NULL;
     top_index++;
     return 1;
@@ -62,14 +58,20 @@ int stack::push(char* question, char* answer){
     s_node* new_node = new s_node;
     new_node->next = head;
     new_node->data = new trivia[SIZE];
-    new_node->data[top_index] = *element;
+    new_node->data[top_index].question = new char[strlen(question) + 1];
+    new_node->data[top_index].answer = new char[strlen(answer) + 1];
+    strcpy(new_node->data[top_index].question, question);
+    strcpy(new_node->data[top_index].answer, answer);
     head = new_node;
     top_index++;
     return 1;
   }
 
   //otherwise, it's not at the max capacity so add regularly
-  head->data[top_index] = *element;
+  head->data[top_index].question = new char[strlen(question) + 1];
+  head->data[top_index].answer = new char[strlen(answer) + 1];
+  strcpy(head->data[top_index].question, question);
+  strcpy(head->data[top_index].answer, answer);
   top_index++;
   return 1;
 }
