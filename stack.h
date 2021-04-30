@@ -30,8 +30,13 @@ class stack {
   //Task 5: Pop a trivia question from the top
   int pop();
   
- private:
+  //get data from stack node
+  char* get_answer();
+  char* get_question();
+  
+private:
   s_node* head;
   int top_index; //set to zero initially. When it equals SIZE, the array is full
-  trivia* recently_popped;
+  char* popped_q; //recently popped question
+  char* popped_a; //recently popped answer
 };

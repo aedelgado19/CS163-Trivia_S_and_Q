@@ -26,11 +26,12 @@ int main(){
     cout << "---------------------------------------------------" << endl;
     cout << "Valid commands are: " << endl;
     cout << "add - add a trivia question" << endl; // enqueue
-    cout << "draw - choose a new trivia question" << endl; //dequeue, push
+    cout << "draw - choose a new trivia question" << endl; //dequeue, display, push
     cout << "check - check your answer to the question" << endl; //check, push, pop
     cout << "du - display used questions" << endl; //display stack
     cout << "dc - display correctly answered questions" << endl; //display stack
     cout << "dq - display playable questions" << endl; //display queue
+    cout << "q - quit program" << endl;
     cout << "> ";
     cin.get(input, 20);
     cin.get();
@@ -49,6 +50,12 @@ int main(){
       cin.get();
       b_success = new_queue->check(answer);
       print_success(b_success);
+      if(b_success == true){ //pop from used and push to correct
+	used_stack->pop();
+	char* a = used_stack->get_answer();
+	char* q = used_stack->get_question();
+	correct_stack->push(q, a);
+      }
     }
 
     //draw calls dequeue, a print function, and push

@@ -14,7 +14,9 @@
 /* the stack constructor sets the head to null */
 stack::stack(){
   head = NULL;
-  recently_popped = NULL;
+  popped_q = new char[40];
+  popped_a = new char[40];
+  top_index = 0;
 }
 
 /* the stack destructor deallocates all dynamic memory */
@@ -22,8 +24,7 @@ stack::~stack(){
   s_node* current = head;
   while(current != NULL){ 
     s_node* hold = current->next;
-    delete current->data->question;
-    delete current->data->answer;
+    delete [] current->data;
     delete current; 
     current = hold;
   }
@@ -106,9 +107,13 @@ int stack::pop(){
 
   //special case: deleting the last element in head and head is the only node
   if(head->next == NULL && top_index == 1){
-    recently_popped = &head->data[top_index];
-    delete head->data[top_index].question;
-    delete head->data[top_index].answer;
+    std::cout << "a" << std::endl;
+    
+    strcpy(popped_q, head->data[top_index-1].question);
+    strcpy(popped_a, head->data[top_index-1].answer);
+
+    delete head->data[top_index-1].question;
+    delete head->data[top_index-1].answer;
     delete head;
     head = NULL;
     top_index = 0;
@@ -118,7 +123,8 @@ int stack::pop(){
   // if top index is 1, delete the data AND the node
   if(top_index == 1){
     s_node* hold = head;
-    recently_popped = &hold->data[top_index];
+    strcpy(popped_q, head->data[top_index].question);
+    strcpy(popped_a, head->data[top_index].answer);
     head = head->next;
     delete hold->data[top_index].question;
     delete hold->data[top_index].answer;
@@ -128,9 +134,20 @@ int stack::pop(){
     return 1;
   }
   //otherwise just delete the data and fix top index
-  recently_popped = &head->data[top_index];
+  strcpy(popped_q, head->data[top_index].question);
+  strcpy(popped_a, head->data[top_index].answer);
   delete head->data[top_index].question;
   delete head->data[top_index].answer;
   top_index--;  
   return 1;
+}
+
+/* returns question so we can push a new node onto the correct stack from used */
+char* stack::get_question(){
+  return popped_q;
+}
+
+/* returns answer so we can push a new node onto the correct stack from used */
+char* stack::get_answer(){
+  return popped_a;
 }

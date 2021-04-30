@@ -12,7 +12,7 @@
 
 /* Constructor sets rear to null */
 queue::queue(){
-  q_node* rear = NULL;
+  rear = NULL;
 }
 
 /* Destructor deallocates all dynamic memory */
