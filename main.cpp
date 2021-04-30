@@ -104,6 +104,9 @@ int main(){
     }
   }
   cout << "Goodbye!" << endl;
+  delete used_stack;
+  delete correct_stack;
+  delete new_queue;
   return 0;
 }
 

@@ -13,19 +13,25 @@
 /* Constructor sets rear to null */
 queue::queue(){
   rear = NULL;
+  question_asked = new char[40];
+  answer_asked = new char[40];
 }
 
 /* Destructor deallocates all dynamic memory */
 queue::~queue(){
   if(!rear) return;
   q_node* current = rear;
+
+  //traverse and delete as you go
   while(current->next != rear){
     q_node* hold = current->next;
     delete current;
     current = hold;
   }
-  delete current;
+  delete current; //delete last node
   rear = NULL;
+  delete question_asked; //final cleanups
+  delete answer_asked;
 }
 
 /* Enqueue is passed user input from main and creates
@@ -89,17 +95,19 @@ int queue::dequeue(){
 
   //if there's nothing to dequeue, return failure
   if(!rear) return 0;
-
+  
   //if there's only one node to remove
   if(rear->next == rear){
-    question_asked = rear;
+    strcpy(question_asked, rear->data->question);
+    strcpy(answer_asked, rear->data->answer);
     delete rear;
     rear = NULL;
     return 1;
   }
 
   //otherwise remove the front node and update rear's next
-  question_asked = rear->next;
+  strcpy(question_asked, rear->next->data->question);
+  strcpy(answer_asked, rear->next->data->answer);
   q_node* hold = rear->next;
   rear->next = rear->next->next;
   hold->next = NULL;
@@ -121,7 +129,7 @@ bool queue::check(char* user_answer){
   }
 
   //check match
-  if (strcmp(question_asked->data->answer, user_answer) == 0){ //check match
+  if (strcmp(answer_asked, user_answer) == 0){ //check match
     return true;
   }
   return false;
@@ -130,18 +138,18 @@ bool queue::check(char* user_answer){
 int queue::display_question(){
   if(!question_asked) return 0; //no question was asked
   std::cout << "Your question is: " << std::endl;
-  std::cout << question_asked->data->question << std::endl;
+  std::cout << question_asked << std::endl;
   return 1;
 }
 
 /* returns answer so we can push the new node onto the used stack */
 char* queue::get_answer(){
-  return question_asked->data->answer;
+  return answer_asked;
 }
 
 /* returns question so we can push the new node onto the used stack */
 char* queue::get_question(){
-  return question_asked->data->question;
+  return question_asked;
 }
 
 /* returns a bool as to whether or not the queue has anything in it */

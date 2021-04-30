@@ -22,7 +22,7 @@ stack::stack(){
 /* the stack destructor deallocates all dynamic memory */
 stack::~stack(){
   s_node* current = head;
-  while(current != NULL){ 
+  while(current->next != NULL){ 
     s_node* hold = current->next;
     delete [] current->data;
     delete current; 

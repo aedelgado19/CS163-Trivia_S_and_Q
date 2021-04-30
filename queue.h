@@ -44,5 +44,6 @@ class queue{
   bool check_exists();
 private:
   q_node* rear;
-  q_node* question_asked;
+  char* question_asked;
+  char* answer_asked;
 };
