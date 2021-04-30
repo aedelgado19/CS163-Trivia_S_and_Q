@@ -30,16 +30,19 @@ class queue{
   //Task 10: Dequeue a trivia question from front 
   int dequeue();
 
-  //draw a new trivia question
-  int draw();
-
   //check answer
   bool check(char* user_answer);
   
   //display the most recently asked question
   int display_question();
   
- private:
+  //get data from queue node
+  char* get_answer();
+  char* get_question();
+
+  //checks if the queue has anything in it
+  bool check_exists();
+private:
   q_node* rear;
   q_node* question_asked;
 };

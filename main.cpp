@@ -11,6 +11,7 @@ int main(){
 
   int success = 0; // stores success for int return types
   bool b_success = false; // stores success for bool return types
+  bool exists = false;
   stack* used_stack = new stack();
   stack* correct_stack = new stack();
   queue* new_queue = new queue();
@@ -52,9 +53,16 @@ int main(){
 
     //draw calls dequeue, a print function, and push
     if(strcmp(input, "draw") == 0){
-      success = new_queue->draw();
-      print_error_messages(success, "draw");
-      
+      exists = new_queue->check_exists();
+      if(exists == false){
+	cout << "There is nothing to draw." << endl;
+      } else {
+	new_queue->dequeue();
+	new_queue->display_question();
+	char* a = new_queue->get_answer();
+	char* q = new_queue->get_question();
+	used_stack->push(q, a);
+      }
     }
     
     //display used uses stack->display()

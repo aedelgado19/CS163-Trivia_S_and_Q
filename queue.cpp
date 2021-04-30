@@ -108,18 +108,7 @@ int queue::dequeue(){
   return 1;
 }
 
-/* a function to call all functions necessary to draw a question
-   so that the user doesn't have to call "dequeue" for example. That would
-   break some rules of data abstraction. */
-int queue::draw(){
-  dequeue();
-  display_question();
-  //push() to used stack
-  return 0;
-}
-
-/* checks the answer provided by user. 
-   if correct, it returns true.
+/* checks the answer provided by user. if correct, it returns true.
    if wrong, it returns false */
 bool queue::check(char* user_answer){
   char* correct_answer = NULL;
@@ -142,9 +131,25 @@ bool queue::check(char* user_answer){
   return false;
 }
 
-int display_question(){
+int queue::display_question(){
   if(!question_asked) return 0; //no question was asked
-  
+  std::cout << "Your question is: " << std::endl;
   std::cout << question_asked->data->question << std::endl;
   return 1;
+}
+
+/* returns answer so we can push the new node onto the used stack */
+char* queue::get_answer(){
+  return question_asked->data->answer;
+}
+
+/* returns question so we can push the new node onto the used stack */
+char* queue::get_question(){
+  return question_asked->data->question;
+}
+
+/* returns a bool as to whether or not the queue has anything in it */
+bool queue::check_exists(){
+  if(!rear) return false;
+  return true;
 }
