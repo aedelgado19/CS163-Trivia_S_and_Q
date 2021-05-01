@@ -22,16 +22,15 @@ stack::stack(){
 /* the stack destructor deallocates all dynamic memory */
 stack::~stack(){
   s_node* current = head;
-  while(current->next != NULL){ 
+  while(current != NULL){ 
     s_node* hold = current->next;
     delete [] current->data;
     delete current; 
     current = hold;
   }
-  s_node* hold = current->next;
-  delete current;
-  current = hold;
   head = NULL;
+  delete [] popped_q;
+  delete [] popped_a;
 }
 
 /* push adds a new trivia question at the top of the list. 

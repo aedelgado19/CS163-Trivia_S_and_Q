@@ -12,5 +12,4 @@
 struct trivia {
   char* question;
   char* answer;
-  bool is_used;
 };

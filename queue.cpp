@@ -25,13 +25,19 @@ queue::~queue(){
   //traverse and delete as you go
   while(current->next != rear){
     q_node* hold = current->next;
+    delete [] current->data->question;
+    delete [] current->data->answer;
+    delete current->data;
     delete current;
     current = hold;
   }
+  delete [] current->data->question;
+  delete [] current->data->answer;
+  delete current->data;
   delete current; //delete last node
   rear = NULL;
-  delete question_asked; //final cleanups
-  delete answer_asked;
+  delete [] question_asked; //final cleanups
+  delete [] answer_asked;
 }
 
 /* Enqueue is passed user input from main and creates
