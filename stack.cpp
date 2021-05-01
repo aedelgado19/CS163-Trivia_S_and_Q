@@ -3,7 +3,7 @@
    stack.cpp contains the following member functions:
    constructor, destructor, push, display, pop
 
-   Last updated: April 23
+   Last updated: April 30
  */
 
 #include <iostream>

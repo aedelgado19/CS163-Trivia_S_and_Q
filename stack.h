@@ -3,7 +3,7 @@
    stack.h contains the structures and operations
    of the stack class, implemented in a LLL
    
-   Last updated: April 23
+   Last updated: April 30
  */
 #include <iostream>
 #include "trivia.h"

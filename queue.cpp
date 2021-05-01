@@ -3,7 +3,7 @@
    queue.cpp contains the following member functions:
    constructor, destructor, enqueue, display, and dequeue
 
-   Last updated: April 23
+   Last updated: April 30
  */
 
 #include <iostream>

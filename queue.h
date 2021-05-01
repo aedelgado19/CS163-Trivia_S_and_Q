@@ -3,7 +3,7 @@
    queue.h contains the structures and operations
    of the queue class, implemented in a CLL
   
-   Last updated: April 23
+   Last updated: April 30
  */
 
 #include <iostream>

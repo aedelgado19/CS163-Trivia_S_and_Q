@@ -1,3 +1,10 @@
+/* Author: Allison Delgado
+   Class: CS 163 Spring 2021
+   main.cpp serves as a testing site for the ADT
+
+   Last updated: April 30
+ */
+
 #include <iostream>
 #include "stack.h"
 #include "queue.h"
