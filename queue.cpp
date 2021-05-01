@@ -19,7 +19,11 @@ queue::queue(){
 
 /* Destructor deallocates all dynamic memory */
 queue::~queue(){
-  if(!rear) return;
+  if(!rear){
+    delete [] question_asked; //final cleanups
+    delete [] answer_asked;
+    return;
+  }
   q_node* current = rear;
 
   //traverse and delete as you go

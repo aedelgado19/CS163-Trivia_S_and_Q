@@ -24,6 +24,10 @@ stack::~stack(){
   s_node* current = head;
   while(current != NULL){ 
     s_node* hold = current->next;
+    for(int i = 0; i < top_index; i++){
+      delete [] current->data[i]->question;
+      delete [] current->data[i]->array;
+    }
     delete [] current->data;
     delete current; 
     current = hold;
@@ -108,13 +112,10 @@ int stack::pop(){
 
   //special case: deleting the last element in head and head is the only node
   if(head->next == NULL && top_index == 1){
-    std::cout << "a" << std::endl;
-    
     strcpy(popped_q, head->data[top_index-1].question);
     strcpy(popped_a, head->data[top_index-1].answer);
-
-    delete head->data[top_index-1].question;
-    delete head->data[top_index-1].answer;
+    delete [] head->data[top_index-1].question;
+    delete [] head->data[top_index-1].answer;
     delete head;
     head = NULL;
     top_index = 0;
@@ -124,21 +125,21 @@ int stack::pop(){
   // if top index is 1, delete the data AND the node
   if(top_index == 1){
     s_node* hold = head;
-    strcpy(popped_q, head->data[top_index].question);
-    strcpy(popped_a, head->data[top_index].answer);
+    strcpy(popped_q, head->data[top_index-1].question);
+    strcpy(popped_a, head->data[top_index-1].answer);
     head = head->next;
-    delete hold->data[top_index].question;
-    delete hold->data[top_index].answer;
+    delete [] hold->data[top_index-1].question;
+    delete [] hold->data[top_index-1].answer;
     hold->next = NULL;
     delete hold;
     top_index = 5;
     return 1;
   }
   //otherwise just delete the data and fix top index
-  strcpy(popped_q, head->data[top_index].question);
-  strcpy(popped_a, head->data[top_index].answer);
-  delete head->data[top_index].question;
-  delete head->data[top_index].answer;
+  strcpy(popped_q, head->data[top_index-1].question);
+  strcpy(popped_a, head->data[top_index-1].answer);
+  delete [] head->data[top_index-1].question;
+  delete [] head->data[top_index-1].answer;
   top_index--;  
   return 1;
 }
